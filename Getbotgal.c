@@ -1,6 +1,21 @@
 #include <kipr/wombat.h>
 #include <kipr/botball.h>
 #include <kipr/create.h>
+
+create_drive_connect();
+create_drive_disconnect();
+
+create_drive_connect();
+enable_servos();
+
+create_drive(100, 100);
+msleep(1000);
+create_drive(-100, -100)
+mav(0, 100);
+mav(0, -100);
+
+wait_for_light(0);
+
 const int speed = 400;
 void go_straight (int mm)
 {
