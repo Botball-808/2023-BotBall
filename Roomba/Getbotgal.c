@@ -2,6 +2,21 @@
 #include <kipr/botball.h>
 #include <kipr/create.h>
 const int speed = 400;
+
+create_connect();
+create_disconnect();
+
+create_connect();
+enable_servos();
+
+create_drive(100, 100);
+msleep(1000);
+create_drive(-100, -100)
+mav(0, 100);
+mav(0, -100);
+
+wait_for_light(0);
+
 void go_straight (int mm)
 {
     // go straight
