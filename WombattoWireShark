@@ -1,0 +1,169 @@
+#include <stdio.h>
+#include <stdbool.h>
+#include <kipr/wombat.h>
+#include <kipr/botball.h>
+#include <stdlib.h>
+
+void turn(int angle){
+
+    int robotdia = 360;
+    float robotcirc = 3.14*robotdia;    
+    int wheeldia = 56;
+    float wheelcirc = 3.14*wheeldia;
+    float mmpertick = wheelcirc/1800;
+    float angledist = angle/360.0;
+    float distance = (robotcirc*angledist)/mmpertick;
+    motor(1,0);
+    cmpc(0);
+    printf("%f",distance);
+    while (gmpc(0) < distance)
+    {
+        motor(0,75);
+    }
+    ao();
+}
+
+void drivemm(int mm){
+    int wheeldia = 56;
+    float wheelcirc = 3.14*wheeldia;
+    float mmpertick = wheelcirc/1800;
+    float distance = mm/mmpertick;
+    cmpc(1);
+ while (gmpc(1) < distance) {
+     motor(0,75);
+     motor(1,75);
+ }
+    ao();
+}
+
+float getticksformm(int mm) {
+    int wheeldia = 56;
+    float wheelcirc = 3.14*wheeldia;
+    float mmpertick = wheelcirc/1800;
+    float distance = mm/mmpertick;
+    return distance;
+}
+
+const float circ = 175.9;
+const float distance_traveled_in_tick = 0.17584;
+
+void follow_till_distance(int mm, bool leftsideofline){
+    int ticks = mm/distance_traveled_in_tick;    
+    int leftmotor = 0;
+    int rightmotor= 1;
+    
+    if (leftsideofline == false)
+    {
+        leftmotor = 1;
+        rightmotor = 0;
+    }
+    cmpc(0);
+    int speed = 90;
+    while (gmpc(0) < ticks){
+        int actual = analog(0);
+        int di = 0.5;
+        int error = (actual - 1800)*di;
+        if (actual > 1800)
+        { 
+            ao();
+            motor(leftmotor, speed+error);
+            motor(rightmotor, speed-error);
+        }
+                  else{
+                      ao();
+                      motor(rightmotor, speed+error);
+                      motor(leftmotor, speed-error);
+                 }
+        ao();
+}
+}
+void go_forward(int mm){
+    int ticks = mm/distance_traveled_in_tick;
+    cmpc(0);
+    while (gmpc(0) < ticks){
+        motor(0,100);
+        motor(1,100);
+    }
+}
+
+int main()
+{
+    wait_for_light(2);
+    
+    motor(1,-75);
+    motor(0,-75);
+    msleep(500);
+
+    int threshold = 1800; 
+    int speed = 75;
+
+    while ( (analog(0) < threshold) ||
+           (analog(1) < threshold) )
+    {
+        if ( (analog(0) < threshold) &&
+            (analog(1) >= threshold) )
+        {
+            motor(0,0.75*speed);
+            motor(1,-0.1*speed);
+        }
+        else if ( (analog(0) >= threshold) &&
+                 (analog(1) < threshold) )
+        {
+            motor(1,-0.1*speed);
+            motor(0,0.75*speed);
+        }
+        else
+        {
+            motor(0,speed);
+            motor(1,speed);
+        }
+    }
+    ao();
+    motor(0,75);
+    motor(1,75);
+    msleep(500);
+    ao();
+    turn(95);
+    ao();
+   int black = 3600;
+        int white =174;
+        double target =(black+white)/2;
+    	int speed1 = 75;
+        cmpc(0);
+        while(gmpc(0) <= getticksformm(540))
+        {
+            int actual = analog(0);
+            printf("sensor value=%d\n", actual);
+            double deviation = (abs(actual-target))/target;
+            printf("deviation=%f\n", deviation);
+            int increase_to_speed = speed1 * (1+deviation);            
+            //int error = ((actual/target))*(speed);
+        
+            if ( actual > target) 
+            {
+                // black
+                motor(0,speed1);
+                motor(1,increase_to_speed);
+                //create_drive_direct(reduce_to_speed,increase_to_speed);
+            }
+            else
+            {//white
+                motor(1,speed1);
+                motor(0,increase_to_speed);
+            }
+            msleep(100);
+            motor(0,0);
+            motor(1,0);
+                //create_drive_direct(increase_to_speed, reduce_to_speed);
+        /*
+        if ( actual < target ) // black
+            create_drive_direct(speed,error*2.5);
+        else //white
+            create_drive_direct(error, speed);
+        */
+    }
+     ao();
+  //int travel = 300/distance_traveled_in_tick;  
+    ao(0);
+    return 0;
+}
