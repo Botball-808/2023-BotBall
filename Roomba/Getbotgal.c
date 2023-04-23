@@ -1,6 +1,12 @@
 #include <kipr/wombat.h>
 #include <kipr/botball.h>
 #include <kipr/create.h>
+void find_bump(){
+    while (get_create_lbump()!=1){
+  create_drive_direct (100,100);   
+    }
+    create_stop();
+    }
 void flush(){
   int threshold = 1900; int speed = 250;
 while ( (get_create_lfcliff_amt() < threshold) ||
@@ -25,7 +31,8 @@ create_stop();
     
 }
 void find_black(){
- while (get_create_lfcliff_amt()>600){
+ while (get_create_lfcliff_amt()>700){
+     printf("value is %d\n", get_create_lfcliff_amt());
   create_drive_direct (100,100);   
  }
     create_stop();
@@ -64,25 +71,40 @@ wait_for_light(0);
     set_create_total_angle(0);
     while (get_create_total_angle() >-45)
     {
-		create_drive_direct (speed, -speed);
+		create_drive_direct (100, 0);
         printf("angle is %d\n", get_create_total_angle());
     }
     create_stop ();
    
     
     // go straight
-	go_straight(800);    
+	go_straight(750);    
     
     // turn 45 degrees
     set_create_total_angle(0);
     while (get_create_total_angle() >-45)
     {
-		create_drive_direct (speed, -speed);
+		create_drive_direct (200, -200);
         printf("angle is %d\n", get_create_total_angle());
     }
     create_stop ();
     find_black();
     flush();
+    go_straight(220);
+    
+    set_create_total_angle(0);
+    while (get_create_total_angle() >-90)
+    {
+		create_drive_direct (100, -100);
+        printf("angle is %d\n", get_create_total_angle());
+    }
+    create_stop ();
+    
+    create_drive_direct(-100, -100);
+msleep(2000);
+    
+  
+    
     
     
 	// end of real stuff here
@@ -90,3 +112,4 @@ create_stop ();
 create_disconnect ();
 return 0;
 }
+   
