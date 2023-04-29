@@ -71,7 +71,7 @@ wait_for_light(0);
     set_create_total_angle(0);
     while (get_create_total_angle() >-45)
     {
-		create_drive_direct (100, 0);
+		create_drive_direct (150, 0);
         printf("angle is %d\n", get_create_total_angle());
     }
     create_stop ();
@@ -95,12 +95,12 @@ wait_for_light(0);
     set_create_total_angle(0);
     while (get_create_total_angle() >-90)
     {
-		create_drive_direct (100, -100);
+		create_drive_direct (150, -150);
         printf("angle is %d\n", get_create_total_angle());
     }
     create_stop ();
     
-    create_drive_direct(-100, -100);
+    create_drive_direct(-200, -200);
 msleep(2000);
     
   
