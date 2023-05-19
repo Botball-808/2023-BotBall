@@ -14,7 +14,7 @@ void flush(){
     {
         if ( (get_create_lfcliff_amt() < threshold) &&
             (get_create_rfcliff_amt() >= threshold) )
-        {
+	{
             create_drive_direct(0.75*speed, -0.1*speed);
         }
         else if ( (get_create_lfcliff_amt() >= threshold) &&
@@ -57,24 +57,28 @@ int main()
     create_drive_direct(100, 100);
     msleep(1000);
     create_stop();
-   /* motor(0,-20);
-    msleep(3000);
-    motor(0,20);
-    msleep(3000);
-    motor(0,0);
+   
+    set_servo_position(1,x);
+    msleep(1000);
+    set_servo_position(1,x);
+    msleep(1000);
     set_servo_position(0,1800);
     msleep(1000);
     set_servo_position(0,100);
-    msleep(1000);*/
+    msleep(1000);
     wait_for_light(0);
     // create_connect();
     // enable_servos(); 
     shut_down_in(119);
 
+	//Turning right is negative
+	//Turning left is positive
     // start of real stuff here
-
-
-
+	
+	set_servo_position(1,x);
+	msleep(1000);
+	
+	set_servo_position(0,100);
 
     // turn 45 degrees 
     set_create_total_angle(0);
@@ -108,17 +112,15 @@ int main()
         printf("3 angle is %d\n", get_create_total_angle());
     }
     create_stop ();
+	
+	set_servo_position(0,1800);
+	msleep(1000);
+	
     create_drive_direct(-100, -100);
     msleep(1700);
-    /*motor(0,-20);
-    msleep(4750);
-    motor(0,0);
-    set_servo_position(0,1800);
-    msleep(1000);
-    create_drive_direct(-100, -100);
-    msleep(1200);
+    
 	set_servo_position(0,100);
-    msleep(1000);*/
+    msleep(3000);
     go_straight(700);
 
     set_create_total_angle(0);
@@ -128,26 +130,58 @@ int main()
         printf("4 angle is %d\n", get_create_total_angle());
     }
     create_stop();
-    msleep(2000);
-
-    set_create_total_angle(0);
-    while (get_create_total_angle() <90)
+    
+	set_servo_position(0,1800);
+	msleep(1000);
+	
+	 set_create_total_angle(0);
+    while (get_create_total_angle() >-90)
     {
-        create_drive_direct (-50, 50);
+        create_drive_direct (50, -50);
         printf("5 angle is %d\n", get_create_total_angle());
     }
     create_stop();
-    msleep(2000);
-
-    set_create_total_angle(0);
+	
+	create_drive_direct(-100,-100);
+	msleep(8000);
+	
+	go_straight(1000);
+	
+	
+	set_create_total_angle(0);
     while (get_create_total_angle() >-90)
     {
         create_drive_direct (50, -50);
         printf("6 angle is %d\n", get_create_total_angle());
     }
-    msleep(2000);
+    create_stop();
+	
+	create_drive_direct(-100,-100);
+	msleep(2000);
+	
+	set_create_total_angle(0);
+    while (get_create_total_angle() <90)
+    {
+        create_drive_direct (-50, 50);
+        printf("7 angle is %d\n", get_create_total_angle());
+    }
+    create_stop();
+	
+	set_servo_position(0,1800);
+	msleep(1000);
 
-
+	create_drive_direct(-100,-100);
+	msleep(1600);
+	
+	set_servo_position(0,100);
+	msleep(1000);
+	
+	go_straight(1000);
+	
+	
+	
+	
+	
 
     // end of real stuff here
     create_stop ();
