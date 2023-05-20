@@ -220,7 +220,7 @@ int main()
     }
     create_stop();
     
-    set_servo_position(1,100);
+    set_servo_position(1,50);
     msleep(2000);
 	
 	set_servo_position(0,1800);
@@ -256,7 +256,7 @@ int main()
     }
     create_stop();
     
-    set_servo_position(1,100);
+    set_servo_position(1,50);
     msleep(2000);
 	
 	set_servo_position(0,1800);
@@ -316,7 +316,7 @@ int main()
     }
     create_stop();
 	
-	 set_servo_position(1,100);
+	 set_servo_position(1,50);
     msleep(2000);
 	
 	set_servo_position(0,1800);
