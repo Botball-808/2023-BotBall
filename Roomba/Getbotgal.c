@@ -58,9 +58,8 @@ int main()
     msleep(1000);
     create_stop();
    
-    set_servo_position(1,x);
-    msleep(1000);
-    set_servo_position(1,x);
+    
+    set_servo_position(1,1900);
     msleep(1000);
     set_servo_position(0,1800);
     msleep(1000);
@@ -75,7 +74,7 @@ int main()
 	//Turning left is positive
     // start of real stuff here
 	
-	set_servo_position(1,x);
+	set_servo_position(1,450);
 	msleep(1000);
 	
 	set_servo_position(0,100);
@@ -91,13 +90,13 @@ int main()
 
 
     // go straight
-    go_straight(700);    
+    go_straight(775);    
 
     // turn 45 degrees
     set_create_total_angle(0);
-    while (get_create_total_angle() >-46)
+    while (get_create_total_angle() >-44)
     {
-        create_drive_direct (90, -90);
+        create_drive_direct (50, -50);
         printf("2 angle is %d\n", get_create_total_angle());
     }
     create_stop ();
@@ -106,9 +105,9 @@ int main()
     go_straight(220);
 
     set_create_total_angle(0);
-    while (get_create_total_angle() >-90)
+    while (get_create_total_angle() >-88)
     {
-        create_drive_direct (100, -100);
+        create_drive_direct (50, -50);
         printf("3 angle is %d\n", get_create_total_angle());
     }
     create_stop ();
@@ -117,10 +116,14 @@ int main()
 	msleep(1000);
 	
     create_drive_direct(-100, -100);
-    msleep(1700);
+    msleep(2200);
+    create_stop ();
     
-	set_servo_position(0,100);
-    msleep(3000);
+	set_servo_position(0,1);
+    msleep(2000);
+    
+    set_servo_position(1,850);
+    msleep(2000);
     go_straight(700);
 
     set_create_total_angle(0);
@@ -131,8 +134,10 @@ int main()
     }
     create_stop();
     
+    set_servo_position(1,100);
+    msleep(2000);
 	set_servo_position(0,1800);
-	msleep(1000);
+	msleep(2000);
 	
 	 set_create_total_angle(0);
     while (get_create_total_angle() >-90)
@@ -141,9 +146,12 @@ int main()
         printf("5 angle is %d\n", get_create_total_angle());
     }
     create_stop();
+    
+    set_servo_position(1,450);
+    msleep(1000);
 	
 	create_drive_direct(-100,-100);
-	msleep(8000);
+	msleep(6500);
 	
 	go_straight(100);
 	
@@ -157,7 +165,7 @@ int main()
     create_stop();
 	
 	create_drive_direct(-100,-100);
-	msleep(2000);
+	msleep(2500);
 	
 	set_create_total_angle(0);
     while (get_create_total_angle() <90)
@@ -167,14 +175,17 @@ int main()
     }
     create_stop();
 	
+   
 	set_servo_position(0,1800);
 	msleep(1000);
 
 	create_drive_direct(-100,-100);
 	msleep(1600);
 	
-	set_servo_position(0,100);
-	msleep(1000);
+	set_servo_position(0,250);
+	msleep(2000);
+    
+    set_servo_position(1,800);
 	
 	go_straight(100);
 	
@@ -199,7 +210,7 @@ int main()
 	create_drive_direct(-100,-100);
 	msleep(1500);
 	
-	go_straight(700);
+	go_straight(500);
 	
 	set_create_total_angle(0);
     while (get_create_total_angle() >-180)
@@ -208,6 +219,9 @@ int main()
         printf("10 angle is %d\n", get_create_total_angle());
     }
     create_stop();
+    
+    set_servo_position(1,100);
+    msleep(2000);
 	
 	set_servo_position(0,1800);
 	msleep(1000);
@@ -220,13 +234,19 @@ int main()
     }
     create_stop();
 	
+    set_servo_position(1,450);
+    msleep(1000);
+    
 	create_drive_direct(-100,-100);
 	msleep(8000);
-	
+    
 	set_servo_position(0,100);
 	msleep(1000);
+    
+    set_servo_position(1,800);
+    msleep(1000);
 	
-	go_straight(700);
+	go_straight(500);
 	
 	set_create_total_angle(0);
     while (get_create_total_angle() >-180)
@@ -235,6 +255,9 @@ int main()
         printf("10 angle is %d\n", get_create_total_angle());
     }
     create_stop();
+    
+    set_servo_position(1,100);
+    msleep(2000);
 	
 	set_servo_position(0,1800);
 	msleep(1000);
