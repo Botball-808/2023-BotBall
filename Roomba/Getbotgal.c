@@ -300,10 +300,27 @@ int main()
 	create_drive_direct(-100,-100);
 	msleep(1600);
 	
-	set_servo_position(0,300);
+	set_servo_position(0,250);
 	msleep(1000);
 	
+	set_servo_position(1,800);
+	msleep(1000);
 	
+	go_straight(700);
+	
+	set_create_total_angle(0);
+    while (get_create_total_angle() >-90)
+    {
+        create_drive_direct (50, -50);
+        printf("14 angle is %d\n", get_create_total_angle());
+    }
+    create_stop();
+	
+	 set_servo_position(1,100);
+    msleep(2000);
+	
+	set_servo_position(0,1800);
+	msleep(1000);
 
     // end of real stuff here
     create_stop ();
